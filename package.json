@@ -1,0 +1,16 @@
+{
+  "name": "sub-trans-srt",
+  "version": "1.0.0",
+  "description": "A Batch Subtitle Translator for SRT Files built with Node. See readme.md for usage instructions.",
+  "main": "sub-trans.js",
+  "scripts": {
+    "start": "node sub-trans-srt.js"
+  },
+  "keywords": ["translate", "subtitle", "srt", "translation"],
+  "author": "C. Alex <contact@yhy.fi> (https://yhy.fi/)",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "querystring": "^0.2.1"
+  }
+}
