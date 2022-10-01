@@ -7,7 +7,7 @@ const origin = 'en'
 const dest = 'fi'
 
 const key = 'YOUR_API_KEY_HERE'
-const service = 'yandex'
+const service = 'yandex' // or 'google'
 const style = 'swap' // or 'add'
 
 async function doWork (){

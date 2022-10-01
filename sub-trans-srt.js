@@ -98,7 +98,7 @@ async function main(){
     for(let i=0;i<filesInDir.length;i++){
         // extract text in batches of maxlength
         try {
-            let wholedata = fs.readFileSync(`./srt/og/${filesInDir[i]}`, 'utf8');
+            let wholedata = fs.readFileSync(`./${srtDir}/${filesInDir[i]}`, 'utf8');
             let charsum = wholedata.length
             let data = wholedata.split('\n')
             let texts = []
@@ -117,15 +117,16 @@ async function main(){
                     }
                 }
                 // Create the document to be translated, api request/translate the document, add the response to the translated document, then clear texts to continue
-                const selectedText = texts.join('\n')
+                const selectedText =(modeSelected=='google'?texts.join('\n<br/>'):texts.join('\n')) // google removes newline chars so using <br/> to differentiate lines
                 const direction = `${originLang}-${destLang}`
                 charsum-=selectedText.length
                 console.log(`Translating ${selectedText.length} characters...\n~${charsum} characters remain.`) // Console Reporting
                 switch(modeSelected){
-                    // case 'google':
-                            //function to be added in later release
-                    //     let gtrans = await axios.post('POST https://translation.googleapis.com/language/translate/v2')
-                    //     break;
+                    case 'google':
+                        let gtrans = await axios.post(`https://translation.googleapis.com/language/translate/v2?`, querystring.stringify({ key:apiKey, q: selectedText, target:destLang, format:'html', source:originLang }))
+                        const splitTranslatedTxt = gtrans.data.data.translations[0].translatedText.split('<br/>')
+                        for(let m=0;m<splitTranslatedTxt.length;m++){translatedTexts.push(splitTranslatedTxt[m])}
+                        break;
                     case 'yandex':
                         let ytrans = await axios.post('https://translate.yandex.net/api/v1.5/tr.json/translate?', querystring.stringify({ key:apiKey, text: selectedText, lang:direction, format:'html' }))
                         if(ytrans.data.code!==200){
@@ -150,7 +151,6 @@ async function main(){
             // Translation styles: add / swap
             switch(translationStyle){
                 case 'add':
-                    console.log('add style selected')
                     // Reconstruct the file, with translation lines (combined)
                     for(let k=0;k<data.length;k++){
                         if(/.*[a-zA-Z].*/.test(data[k])){
