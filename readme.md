@@ -1,4 +1,4 @@
-📝 Sub-Trans-SRT v1.1.0
+📝 Sub-Trans-SRT v1.2.0
 
 A Batch Subtitle Translator compatible with SRT files.  
 
@@ -58,6 +58,8 @@ start - this runs the start script, which executes the batch translation.
 
 🖱️ Example of Command Line Usage:
 
+npx sub-trans-srt start --dir="./inDir" --out="./output" --o=ru --d=en --key="REDACTED" --service=yandex --style=add
+
 npm run start -- --dir='.\origin\' --out='.\dest\' --o=en --d=fi --key='---------REDACTED------------' --service=google --style=swap
 
 npm run start -- --dir='.\origin\' --out='.\dest2\' --o=en --d=fi --key='------------------------------REDACTED------------------------------------' --service=yandex --style=add
@@ -78,4 +80,4 @@ npm run start -- --dir='.\origin\' --out='.\dest2\' --o=en --d=fi --key='-------
 
 🐛 Bug Fixes:
 
--Fixed ENOENT where srt file retreival was occuring from development-specified folder, not user-specified folder.
+-Translations from Cyrillic Alphabet now supported (Arabic/Chinese/Japanese support to be added later)
