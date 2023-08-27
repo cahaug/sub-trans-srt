@@ -126,6 +126,7 @@ async function main(){
                         let gtrans = await axios.post(`https://translation.googleapis.com/language/translate/v2?`, querystring.stringify({ key:apiKey, q: selectedText, target:destLang, format:'html', source:originLang }))
                         const splitTranslatedTxt = gtrans.data.data.translations[0].translatedText.split('<br/>')
                         for(let m=0;m<splitTranslatedTxt.length;m++){translatedTexts.push(splitTranslatedTxt[m])}
+                        console.log('Translation Part Complete')
                         break;
                     case 'yandex':
                         let ytrans = await axios.post('https://translate.yandex.net/api/v1.5/tr.json/translate?', querystring.stringify({ key:apiKey, text: selectedText, lang:direction, format:'html' }))
@@ -136,6 +137,13 @@ async function main(){
                         const splitTranslatedText = ytrans.data.text[0].split('\n')
                         console.log('Translation Part Complete') // Console Reporting
                         for(let m=0;m<splitTranslatedText.length;m++){translatedTexts.push(splitTranslatedText[m])}
+                        break;
+                    case 'libre':
+                        let libtrans = await axios.post(`http://127.0.0.1:5000/translate`, { target:destLang, source:originLang, format:'html', q: selectedText })
+                        console.log('Translation Part Complete') // Console Reporting
+                        // if(libtrans.statuscode!==200){console.error('Improper Status Code Response LibreTranslate')}
+                        const splitTranslatedTexts = libtrans.data.translatedText.split('\n')
+                        for(let m=0;m<splitTranslatedTexts.length;m++){translatedTexts.push(splitTranslatedTexts[m])}
                         break;
                     default:
                         console.error('Missing Translation Service Flag')
@@ -177,7 +185,7 @@ async function main(){
             console.log('File Reconstructed in Memory') // Console Reporting
 
             // Write translated subs data to New File
-            fs.writeFileSync(`./${srtDir2}/${destLang}-${filesInDir[i]}`, data.join('\n'))
+            fs.writeFileSync(`./${srtDir2}/${filesInDir[i].split('.srt')[0]}_${destLang}.srt`, data.join('\n'))
 
             console.log(`File Written to Disk.\nTranslation #${i+1} Complete.`) // Console Reporting
             

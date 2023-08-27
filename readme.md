@@ -1,4 +1,4 @@
-📝 Sub-Trans-SRT v1.2.0
+📝 Sub-Trans-SRT v1.3.0
 
 A Batch Subtitle Translator compatible with SRT files.  
 
@@ -9,6 +9,8 @@ A queue of lines to be translated are extracted from each file and translated vi
 ✍️ Currently Supported Translation API:
 
 -Yandex Translate ($75 Free Credit w/ Signup)
+
+-LibreTranslate local (ArgosTranslate/NMT; completely free)
 
 -Google Translate ($300-400 Free Credit w/ Signup)
 
@@ -22,7 +24,7 @@ A queue of lines to be translated are extracted from each file and translated vi
 
 
 
-⚠️ You will need an API Key from one of these services to proceed with the translation.
+⚠️ You will need an API Key from one of these services to proceed with the translation, unless you are running LibreTranslate locally.
 
 
 
@@ -48,9 +50,9 @@ start - this runs the start script, which executes the batch translation.
 
 --d='' - this is the 2/3-letter country code available from the list in the LanguageCodes.txt file in this directory.
 
---key='' - this is your API Key as a string.  Yandex Translate (easy to create API key), Google Translate (create API key in Gcloud) is currently supported.
+--key='' - this is your API Key as a string.  Yandex Translate (easy to create API key), Google Translate (create API key in Gcloud) are currently supported.  If using LibreTranslate, you can skip this, or write 'na'.
 
---service='' - Yandex Translate, Google Translate are currently supported in version 1.1.0, and should be selected with a string 'yandex' or 'google'
+--service='' - Yandex Translate, LibreTranslate and Google Translate are currently supported in version 1.3.0, and should be selected with a string 'yandex', 'libre', or 'google'.  Service 'libre' assumes server is located at 127.0.0.1:5000.
 
 --style='' - two styles are available, 'add' and 'swap'.  Add inserts the translated line below its untranslated line, whereas swap removes the untranslated line and replaces it with the translated line.
 
@@ -58,11 +60,13 @@ start - this runs the start script, which executes the batch translation.
 
 🖱️ Example of Command Line Usage:
 
-npx sub-trans-srt start --dir="./inDir" --out="./output" --o=ru --d=en --key="REDACTED" --service=yandex --style=add
+npx sub-trans-srt start --dir=".\inDir\" --out=".\output\" --o=ru --d=en --key="REDACTED" --service=yandex --style=add
 
-npm run start -- --dir='.\origin\' --out='.\dest\' --o=en --d=fi --key='---------REDACTED------------' --service=google --style=swap
+npx sub-trans-srt start --dir=".\inDir\" --out=".\output\" --o=ru --d=en --service=libre --style=add
 
-npm run start -- --dir='.\origin\' --out='.\dest2\' --o=en --d=fi --key='------------------------------REDACTED------------------------------------' --service=yandex --style=add
+npm run start -- --dir='.\origin\' --out='.\dest\' --o=ru --d=fi --key='---------REDACTED------------' --service=google --style=swap
+
+npm run start -- --dir='.\origin\' --out='.\dest2\' --o=fi --d=ru --key='------------------------------REDACTED------------------------------------' --service=yandex --style=add
 
 
 
@@ -80,4 +84,4 @@ npm run start -- --dir='.\origin\' --out='.\dest2\' --o=en --d=fi --key='-------
 
 🐛 Bug Fixes:
 
--Translations from Cyrillic Alphabet now supported (Arabic/Chinese/Japanese support to be added later)
+-Support for Asian Languages is Coming Soon.
