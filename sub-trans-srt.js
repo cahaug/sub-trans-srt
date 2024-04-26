@@ -15,7 +15,7 @@ let destLang = ''
 // Add your Yandex Translate API Key Here
 let apiKey = ''
 // Character cutoff per request
-let charPerReq = 9800
+let charPerReq = 2400
 // Choose Translation Service
 let modeSelected = 'yandex'
 // TranslationStyle can be add or swap (put translated line below old line or swap replaces line with translated)

@@ -1,4 +1,4 @@
-📝 Sub-Trans-SRT v1.4.0
+📝 Sub-Trans-SRT v1.4.1
 
 A Batch Subtitle Translator compatible with SRT files.  
 
@@ -84,4 +84,4 @@ npm run start -- --dir='.\origin\' --out='.\dest2\' --o=fi --d=ru --key='-------
 
 🐛 Bug Fixes:
 
--Support implemented for Simplified Chinese, Korean, Japanese (katakana, hiragana, hankaku, zenkaku).
+-Support implemented for Simplified Chinese, Korean, Japanese (katakana, hiragana, hankaku, zenkaku).  Translation batches are now smaller and more frequent.
