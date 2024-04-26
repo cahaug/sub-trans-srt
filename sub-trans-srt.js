@@ -108,7 +108,7 @@ async function main(){
             let j=0
             while(j<data.length){
                 while(texts.join('\n').length<charPerReq){
-                    if(/.*[a-zA-Zа-яА-Я].*/.test(data[j])){
+                    if(/.*[a-zA-Zа-яА-Я一-龥가-힣一-龠ぁ-ゔァ-ヴー].*/.test(data[j])){
                         texts.push(data[j])
                         if(j==data.length-1){break}
                         else{j+=1}
@@ -161,7 +161,7 @@ async function main(){
                 case 'add':
                     // Reconstruct the file, with translation lines (combined)
                     for(let k=0;k<data.length;k++){
-                        if(/.*[a-zA-Zа-яА-Я].*/.test(data[k])){
+                        if(/.*[a-zA-Zа-яА-Я一-龥가-힣一-龠ぁ-ゔァ-ヴー].*/.test(data[k])){
                             // If line has text, shift corresponding queue entry into file
                             data.splice(k+1,0,translatedTexts.shift().split('\r\n')[0])
                             // skip added line
@@ -172,7 +172,7 @@ async function main(){
                 case 'swap':
                     // Reconstruct the file, with translation lines (replace line)
                     for(let k=0;k<data.length;k++){
-                        if(/.*[a-zA-Zа-яА-Я].*/.test(data[k])){
+                        if(/.*[a-zA-Zа-яА-Я一-龥가-힣一-龠ぁ-ゔァ-ヴー].*/.test(data[k])){
                             // If line has text, shift corresponding queue entry into file
                             data.splice(k,1,translatedTexts.shift().split('\r\n')[0])
                         }
